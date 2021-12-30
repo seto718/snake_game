@@ -1,7 +1,8 @@
 import React from 'react';
+import { defaultdifficulty,Difficulty } from '../constants';
 
-const Navigation = ({ length, difficulty, onChangeDifficulty }) => {
-    const upVisibility = difficulty < 5 ? '' : 'is-hidden'
+const Navigation = ({ length, difficulty = defaultdifficulty, onChangeDifficulty }) => {
+    const upVisibility = difficulty < Difficulty.length ? '' : 'is-hidden'
     const downVisibility = difficulty > 1 ? '' : 'is-hidden'
     const onUpDifficulty = () => onChangeDifficulty(difficulty + 1)
     const onDownDifficulty = () => onChangeDifficulty(difficulty - 1)
