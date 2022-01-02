@@ -1,3 +1,4 @@
+// 定数定義群
 import {getSnakePosition,initFields} from '../utils';
 
 export const fieldSize = 35
@@ -6,6 +7,7 @@ export const initialValues = initFields(fieldSize, initialPosition)
 export const defaultInterval = 100
 export const defaultdifficulty = 3
 export const Difficulty=[ 1000, 500, 100, 50, 10]
+
 
 
 export const GameStatus = Object.freeze({
@@ -41,4 +43,9 @@ export const DirectionKeyCodeMap = Object.freeze({
   38: Direction.up,
   39: Direction.right,
   40: Direction.down
+})
+
+export const SoundStatus = Object.freeze({
+  on: 'on',
+  off: 'off'
 })

@@ -1,4 +1,8 @@
 import React, { useCallback, useEffect, useState} from 'react';
+import {Howl} from 'howler';
+import grume_sound from '../music/grume.mp3';
+import retoro_sound from '../music/retoro.mp3';
+import gameover_sound from '../music/gameover.mp3';
 import {initFields, getFoodPosition,getSnakePosition,isCollision,isEatingMyself } from '../utils';
 import {
     initialPosition,
@@ -10,7 +14,8 @@ import {
     Direction,
     OppositeDirection,
     Delta,
-    DirectionKeyCodeMap
+    DirectionKeyCodeMap,
+    SoundStatus
 } from '../constants';
 
 
@@ -25,6 +30,40 @@ const unsubscribe = () => {
     clearInterval(timer)
 }
 
+
+const endsound = new Howl({
+    src: gameover_sound,
+    loop: true,
+    volume: 0.6,
+    sprite: {
+        beginning: [0, 30000]
+    }
+});
+const id1 = endsound.play('beginning')
+console.log(id1)
+endsound.stop(id1)
+
+const music = new Howl({
+    src: grume_sound,
+    loop: true,
+    volume: 0.6,
+    sprite: {
+        between: [0, 70000]
+    }
+});
+const id2 = music.play('between')
+console.log(id2)
+music.stop(id2)
+
+const effect = new Howl({
+    src: retoro_sound,
+    loop: false,
+    volume: 0.4,
+});
+const id3 = effect.play()
+console.log(id3)
+effect.stop(id3)
+
 const useSnakeGame = () => {
 
     const [fields, setFields] = useState(initialValues)
@@ -34,9 +73,10 @@ const useSnakeGame = () => {
     const [direction, setDirection] = useState(Direction.up)
     const [difficulty, setDifficulty] = useState(defaultdifficulty)
     const [snakePosition, setSnakePosition] = useState(initialPosition)
-
-    const start = () => setStatus(GameStatus.playing)
-    const stop = () => setStatus(GameStatus.suspended)
+    const [soundstatus, setSoundStatus] = useState('on')
+    
+    const start = () => {setStatus(GameStatus.playing)}
+    const stop = () => {setStatus(GameStatus.suspended)}
 
     const reload = () => {
         timer = setInterval(() => {
@@ -50,12 +90,12 @@ const useSnakeGame = () => {
         setFields(initFields(fields.length,snakePosition))
         setBody([snakePosition])
         setDifficulty(defaultdifficulty)
+        endsound.stop(id1);
     }
 
     useEffect(() => {
         if(status === GameStatus.init){
             setBody([snakePosition])
-        
         //テスト用ヘビの初期の長さ調整
         // setBody(
         //   new Array(15).fill('').map((_item,index) => ({x:17,y:17 + index})),
@@ -73,41 +113,62 @@ const useSnakeGame = () => {
         }, interval)
         return unsubscribe
         }
-        
     },[difficulty],status,snakePosition)
 
     useEffect(() => {
         if(!body.length === 0 || status !== GameStatus.playing){
-        return
+            return
         }
         const canContinue = handleMoving()
-
+        
         if (!canContinue){
-        unsubscribe()
-        setStatus(GameStatus.gameover)
+            unsubscribe()
+            if(soundstatus !== SoundStatus.off){
+                console.log(music.playing(id2))
+                if(music.playing(id2) == true){
+                    music.stop(id2)
+                }
+                effect.play(id3)
+            }
+            setStatus(GameStatus.gameover)
         }
     },[tick])
+
+    //サウンド処理
+    useEffect(() => {
+        if(soundstatus !== SoundStatus.off){
+            if(status === GameStatus.playing){
+                if(music.playing(id2) === false){
+                    music.play(id2)
+                }
+                // console.log(music.playing(id2))
+            }
+            if(status === GameStatus.gameover){
+                endsound.play(id1)
+            }
+        }
+    },[status])
 
     //ヘビが進行する関数
     const handleMoving = () => {
         const {x, y} = body[0]
         const delta = Delta[direction]
         const newPosition = {
-        x: x+delta.x,
-        y: y+delta.y
+            x: x+delta.x,
+            y: y+delta.y
         }
 
         if(isCollision(fields.length, newPosition) || isEatingMyself(fields, newPosition)){
-        unsubscribe()
-        return false
+            unsubscribe()
+            return false
         }
         const newBody =[...body]
         if(fields[newPosition.y][newPosition.x] !== 'food'){
-        const removingTrack = newBody.pop()
-        fields[removingTrack.y][removingTrack.x] = ''
+            const removingTrack = newBody.pop()
+            fields[removingTrack.y][removingTrack.x] = ''
         } else{
-        const food = getFoodPosition(fields.length, [...newBody, newPosition])
-        fields[food.y][food.x] = 'food'
+            const food = getFoodPosition(fields.length, [...newBody, newPosition])
+            fields[food.y][food.x] = 'food'
         }
         
         fields[newPosition.y][newPosition.x] = 'snake'
@@ -143,19 +204,18 @@ const useSnakeGame = () => {
     const updateDifficulty = useCallback((difficulty) => {
         
         if(status === GameStatus.suspended){
-        if(difficulty < 1 || difficulty > difficulty.length){
-            return
-        }
-        setDifficulty(difficulty)
+            if(difficulty < 1 || difficulty > difficulty.length){
+                return
+            }
+            setDifficulty(difficulty)
         }
 
         //なぜかここにsuspendedの場合も追加しようとしても通ってしまう
         if(status !== GameStatus.init){
-        // console.log('aaa')
-        return
+            return
         }
         if(difficulty < 1 || difficulty > difficulty.length){
-        return
+            return
         }
         setDifficulty(difficulty)
     },[status, difficulty])
@@ -171,7 +231,31 @@ const useSnakeGame = () => {
         document.addEventListener('keydown',handleKeyDown);
         return () => document.removeEventListener('keydown',handleKeyDown)
     },[updateDirection])
+
     
+    const changeSoundStatus = useCallback((soundstatus,id1,id2) => {
+        
+        if(soundstatus === SoundStatus.on){
+            soundstatus = SoundStatus.off
+            setSoundStatus(soundstatus)
+            if(music.playing(id2)){
+                return music.stop(id2);
+            }else if(endsound.playing(id1)){
+                return endsound.stop(id1);;
+            }else{}
+        }else{
+            soundstatus = SoundStatus.on
+            setSoundStatus(soundstatus)
+            if((music.playing(id2) === false) && (status !== GameStatus.gameover)){
+                return music.play(id2);
+            }
+            if(endsound.playing(id1) === false){
+                return endsound.play(id1);
+            }
+        }
+        
+    },[soundstatus])
+
     return {
         body,
         difficulty,
@@ -182,6 +266,10 @@ const useSnakeGame = () => {
         reload,
         updateDirection,
         updateDifficulty,
+        soundstatus,
+        changeSoundStatus,
+        id1,
+        id2
     };
 }
 
