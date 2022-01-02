@@ -81,12 +81,7 @@ const useSnakeGame = () => {
             // console.log(music.playing(id2))
         }
     }
-    const stop = () => {
-        setStatus(GameStatus.suspended)
-        if(music.playing(id2)){
-            music.stop(id2)
-        }
-    }
+    const stop = () => {setStatus(GameStatus.suspended)}
 
     const reload = () => {
         timer = setInterval(() => {
@@ -135,21 +130,15 @@ const useSnakeGame = () => {
             unsubscribe()
             if(soundstatus !== SoundStatus.off){
                 effect.play(id3)
+                //console.log(music.playing(id2))
+                if(music.playing(id2) == true){
+                    music.stop(id2)
+                }
+                endsound.play(id1)
             }
             setStatus(GameStatus.gameover)
         }
     },[tick])
-
-    //サウンド処理
-    useEffect(() => {
-        if((soundstatus !== SoundStatus.off)&&(status === GameStatus.gameover)){
-            //console.log(music.playing(id2))
-            if(music.playing(id2) == true){
-                music.stop(id2)
-            }
-            endsound.play(id1)
-        }
-    },[status])
 
     //ヘビが進行する関数
     const handleMoving = () => {
