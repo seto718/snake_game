@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.css": "/snake_game/static/css/main.16a8e241.chunk.css",
-    "main.js": "/snake_game/static/js/main.0cec2a1c.chunk.js",
-    "main.js.map": "/snake_game/static/js/main.0cec2a1c.chunk.js.map",
-    "runtime-main.js": "/snake_game/static/js/runtime-main.c57f20d4.js",
-    "runtime-main.js.map": "/snake_game/static/js/runtime-main.c57f20d4.js.map",
-    "static/js/2.97eecbbe.chunk.js": "/snake_game/static/js/2.97eecbbe.chunk.js",
-    "static/js/2.97eecbbe.chunk.js.map": "/snake_game/static/js/2.97eecbbe.chunk.js.map",
-    "static/js/3.57759c37.chunk.js": "/snake_game/static/js/3.57759c37.chunk.js",
-    "static/js/3.57759c37.chunk.js.map": "/snake_game/static/js/3.57759c37.chunk.js.map",
+    "main.css": "/snake_game/static/css/main.f721bee8.chunk.css",
+    "main.js": "/snake_game/static/js/main.9667dbde.chunk.js",
+    "main.js.map": "/snake_game/static/js/main.9667dbde.chunk.js.map",
+    "runtime-main.js": "/snake_game/static/js/runtime-main.295f36a3.js",
+    "runtime-main.js.map": "/snake_game/static/js/runtime-main.295f36a3.js.map",
+    "static/js/2.975d56a9.chunk.js": "/snake_game/static/js/2.975d56a9.chunk.js",
+    "static/js/2.975d56a9.chunk.js.map": "/snake_game/static/js/2.975d56a9.chunk.js.map",
+    "static/js/3.49fda07a.chunk.js": "/snake_game/static/js/3.49fda07a.chunk.js",
+    "static/js/3.49fda07a.chunk.js.map": "/snake_game/static/js/3.49fda07a.chunk.js.map",
     "index.html": "/snake_game/index.html",
-    "static/css/main.16a8e241.chunk.css.map": "/snake_game/static/css/main.16a8e241.chunk.css.map",
-    "static/js/2.97eecbbe.chunk.js.LICENSE.txt": "/snake_game/static/js/2.97eecbbe.chunk.js.LICENSE.txt"
+    "static/css/main.f721bee8.chunk.css.map": "/snake_game/static/css/main.f721bee8.chunk.css.map",
+    "static/js/2.975d56a9.chunk.js.LICENSE.txt": "/snake_game/static/js/2.975d56a9.chunk.js.LICENSE.txt",
+    "static/media/gameover.f15b9471.mp3": "/snake_game/static/media/gameover.f15b9471.mp3",
+    "static/media/grume.fca7230a.mp3": "/snake_game/static/media/grume.fca7230a.mp3",
+    "static/media/retoro.6524bdeb.mp3": "/snake_game/static/media/retoro.6524bdeb.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.c57f20d4.js",
-    "static/js/2.97eecbbe.chunk.js",
-    "static/css/main.16a8e241.chunk.css",
-    "static/js/main.0cec2a1c.chunk.js"
+    "static/js/runtime-main.295f36a3.js",
+    "static/js/2.975d56a9.chunk.js",
+    "static/css/main.f721bee8.chunk.css",
+    "static/js/main.9667dbde.chunk.js"
   ]
 }
