@@ -40,7 +40,6 @@ const endsound = new Howl({
     }
 });
 const id1 = endsound.play('beginning')
-console.log(id1)
 endsound.stop(id1)
 
 const music = new Howl({
@@ -52,7 +51,6 @@ const music = new Howl({
     }
 });
 const id2 = music.play('between')
-console.log(id2)
 music.stop(id2)
 
 const effect = new Howl({
@@ -61,7 +59,6 @@ const effect = new Howl({
     volume: 0.4,
 });
 const id3 = effect.play()
-console.log(id3)
 effect.stop(id3)
 
 const useSnakeGame = () => {
@@ -84,7 +81,12 @@ const useSnakeGame = () => {
             // console.log(music.playing(id2))
         }
     }
-    const stop = () => {setStatus(GameStatus.suspended)}
+    const stop = () => {
+        setStatus(GameStatus.suspended)
+        if(music.playing(id2)){
+            music.stop(id2)
+        }
+    }
 
     const reload = () => {
         timer = setInterval(() => {
@@ -141,7 +143,7 @@ const useSnakeGame = () => {
     //サウンド処理
     useEffect(() => {
         if((soundstatus !== SoundStatus.off)&&(status === GameStatus.gameover)){
-            console.log(music.playing(id2))
+            //console.log(music.playing(id2))
             if(music.playing(id2) == true){
                 music.stop(id2)
             }
