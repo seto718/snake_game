@@ -132,10 +132,6 @@ const useSnakeGame = () => {
         if (!canContinue){
             unsubscribe()
             if(soundstatus !== SoundStatus.off){
-                console.log(music.playing(id2))
-                if(music.playing(id2) == true){
-                    music.stop(id2)
-                }
                 effect.play(id3)
             }
             setStatus(GameStatus.gameover)
@@ -144,10 +140,12 @@ const useSnakeGame = () => {
 
     //サウンド処理
     useEffect(() => {
-        if(soundstatus !== SoundStatus.off){
-            if(status === GameStatus.gameover){
-                endsound.play(id1)
+        if((soundstatus !== SoundStatus.off)&&(status === GameStatus.gameover)){
+            console.log(music.playing(id2))
+            if(music.playing(id2) == true){
+                music.stop(id2)
             }
+            endsound.play(id1)
         }
     },[status])
 
