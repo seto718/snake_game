@@ -46,7 +46,7 @@ endsound.stop(id1)
 const music = new Howl({
     src: grume_sound,
     loop: true,
-    volume: 0.6,
+    volume: 0.4,
     sprite: {
         between: [0, 70000]
     }
@@ -75,7 +75,15 @@ const useSnakeGame = () => {
     const [snakePosition, setSnakePosition] = useState(initialPosition)
     const [soundstatus, setSoundStatus] = useState('on')
     
-    const start = () => {setStatus(GameStatus.playing)}
+    const start = () => {
+        setStatus(GameStatus.playing)
+        if(soundstatus !== SoundStatus.off){
+            if(music.playing(id2) === false){
+                music.play(id2)
+            }
+            // console.log(music.playing(id2))
+        }
+    }
     const stop = () => {setStatus(GameStatus.suspended)}
 
     const reload = () => {
@@ -137,12 +145,6 @@ const useSnakeGame = () => {
     //サウンド処理
     useEffect(() => {
         if(soundstatus !== SoundStatus.off){
-            if(status === GameStatus.playing){
-                if(music.playing(id2) === false){
-                    music.play(id2)
-                }
-                // console.log(music.playing(id2))
-            }
             if(status === GameStatus.gameover){
                 endsound.play(id1)
             }
