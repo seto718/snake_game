@@ -1,25 +1,32 @@
 {
   "files": {
-    "main.css": "/snake_game/static/css/main.f721bee8.chunk.css",
-    "main.js": "/snake_game/static/js/main.f17c5382.chunk.js",
-    "main.js.map": "/snake_game/static/js/main.f17c5382.chunk.js.map",
+    "main.css": "/snake_game/static/css/main.c2c405d2.chunk.css",
+    "main.js": "/snake_game/static/js/main.dbea468b.chunk.js",
+    "main.js.map": "/snake_game/static/js/main.dbea468b.chunk.js.map",
     "runtime-main.js": "/snake_game/static/js/runtime-main.295f36a3.js",
     "runtime-main.js.map": "/snake_game/static/js/runtime-main.295f36a3.js.map",
-    "static/js/2.c60c0111.chunk.js": "/snake_game/static/js/2.c60c0111.chunk.js",
-    "static/js/2.c60c0111.chunk.js.map": "/snake_game/static/js/2.c60c0111.chunk.js.map",
+    "static/js/2.c438a11e.chunk.js": "/snake_game/static/js/2.c438a11e.chunk.js",
+    "static/js/2.c438a11e.chunk.js.map": "/snake_game/static/js/2.c438a11e.chunk.js.map",
     "static/js/3.49fda07a.chunk.js": "/snake_game/static/js/3.49fda07a.chunk.js",
     "static/js/3.49fda07a.chunk.js.map": "/snake_game/static/js/3.49fda07a.chunk.js.map",
     "index.html": "/snake_game/index.html",
-    "static/css/main.f721bee8.chunk.css.map": "/snake_game/static/css/main.f721bee8.chunk.css.map",
-    "static/js/2.c60c0111.chunk.js.LICENSE.txt": "/snake_game/static/js/2.c60c0111.chunk.js.LICENSE.txt",
+    "static/css/main.c2c405d2.chunk.css.map": "/snake_game/static/css/main.c2c405d2.chunk.css.map",
+    "static/js/2.c438a11e.chunk.js.LICENSE.txt": "/snake_game/static/js/2.c438a11e.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/snake_game/static/media/BG.a6100a09.jpg",
+    "static/media/exp1.13620d33.jpg": "/snake_game/static/media/exp1.13620d33.jpg",
+    "static/media/exp2.5062c8f9.jpg": "/snake_game/static/media/exp2.5062c8f9.jpg",
     "static/media/gameover.f15b9471.mp3": "/snake_game/static/media/gameover.f15b9471.mp3",
+    "static/media/gameover1.0cbdf882.jpg": "/snake_game/static/media/gameover1.0cbdf882.jpg",
+    "static/media/gameover2.8a0b590d.jpg": "/snake_game/static/media/gameover2.8a0b590d.jpg",
+    "static/media/gameover3.38425739.jpg": "/snake_game/static/media/gameover3.38425739.jpg",
+    "static/media/gameover4.3b645634.jpg": "/snake_game/static/media/gameover4.3b645634.jpg",
     "static/media/grume.fca7230a.mp3": "/snake_game/static/media/grume.fca7230a.mp3",
     "static/media/retoro.6524bdeb.mp3": "/snake_game/static/media/retoro.6524bdeb.mp3"
   },
   "entrypoints": [
     "static/js/runtime-main.295f36a3.js",
-    "static/js/2.c60c0111.chunk.js",
-    "static/css/main.f721bee8.chunk.css",
-    "static/js/main.f17c5382.chunk.js"
+    "static/js/2.c438a11e.chunk.js",
+    "static/css/main.c2c405d2.chunk.css",
+    "static/js/main.dbea468b.chunk.js"
   ]
 }
