@@ -1,8 +1,4 @@
 import React, { useCallback, useEffect, useState} from 'react';
-import {Howl} from 'howler';
-import grume_sound from '../music/grume.mp3';
-import retoro_sound from '../music/retoro.mp3';
-import gameover_sound from '../music/gameover.mp3';
 import {initFields, getFoodPosition,getSnakePosition,isCollision,isEatingMyself } from '../utils';
 import {
     initialPosition,
@@ -15,7 +11,13 @@ import {
     OppositeDirection,
     Delta,
     DirectionKeyCodeMap,
-    SoundStatus
+    SoundStatus,
+    endsound,
+    music,
+    effect,
+    id1,
+    id2,
+    id3
 } from '../constants';
 
 
@@ -29,37 +31,6 @@ const unsubscribe = () => {
     }
     clearInterval(timer)
 }
-
-
-const endsound = new Howl({
-    src: gameover_sound,
-    loop: true,
-    volume: 0.6,
-    sprite: {
-        beginning: [0, 30000]
-    }
-});
-const id1 = endsound.play('beginning')
-endsound.stop(id1)
-
-const music = new Howl({
-    src: grume_sound,
-    loop: true,
-    volume: 0.4,
-    sprite: {
-        between: [0, 70000]
-    }
-});
-const id2 = music.play('between')
-music.stop(id2)
-
-const effect = new Howl({
-    src: retoro_sound,
-    loop: false,
-    volume: 0.4,
-});
-const id3 = effect.play()
-effect.stop(id3)
 
 const useSnakeGame = () => {
 
@@ -223,7 +194,6 @@ const useSnakeGame = () => {
         return () => document.removeEventListener('keydown',handleKeyDown)
     },[updateDirection])
 
-    
     const changeSoundStatus = useCallback((soundstatus,id1,id2) => {
         
         if(soundstatus === SoundStatus.on){

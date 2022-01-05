@@ -7,8 +7,7 @@ import {
 
 
 const Player = ({soundstatus,onChange,id1,id2}) => {
-    // console.log(soundstatus)
-    // console.log(onChange(soundstatus))
+
     const change_status =() => onChange(soundstatus,id1,id2)
     const change_icon = soundstatus === "on" ? faVolumeOff : faVolumeMute;
     const change_class = soundstatus === "on" ? `music-btn btn sound-btn` : `music-btn-mute btn sound-btn`;

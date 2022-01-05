@@ -5,6 +5,7 @@ import Button from './conponents/Button';
 import ManipulationPanel from './conponents/ManipulationPanel';
 import Player from './conponents/Player';
 import useSnakeGame from './hooks/useSnakeGame';
+import Popup from './conponents/popup';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="App">
+      <Popup />
       <header className="header">
         <div className="title-container">
           <h1 className="title">Snake Game</h1>
