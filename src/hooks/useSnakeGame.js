@@ -21,7 +21,6 @@ import {
 } from '../constants';
 
 
-
 let timer = undefined
 
 //タイマーが必要なくなったら削除するための関数
@@ -42,14 +41,15 @@ const useSnakeGame = () => {
     const [difficulty, setDifficulty] = useState(defaultdifficulty)
     const [snakePosition, setSnakePosition] = useState(initialPosition)
     const [soundstatus, setSoundStatus] = useState('on')
-    
+    const [gameoverstatus,setGameoverStatus] = useState(0)
+    const [imgstatus,setImgStatus] = useState('')
+
     const start = () => {
         setStatus(GameStatus.playing)
         if(soundstatus !== SoundStatus.off){
             if(music.playing(id2) === false){
                 music.play(id2)
             }
-            // console.log(music.playing(id2))
         }
     }
     const stop = () => {setStatus(GameStatus.suspended)}
@@ -66,8 +66,11 @@ const useSnakeGame = () => {
         setFields(initFields(fields.length,snakePosition))
         setBody([snakePosition])
         setDifficulty(defaultdifficulty)
-        endsound.stop(id1);
+        endsound.stop(id1)
+        
     }
+
+    
 
     useEffect(() => {
         if(status === GameStatus.init){
@@ -101,13 +104,22 @@ const useSnakeGame = () => {
             unsubscribe()
             if(soundstatus !== SoundStatus.off){
                 effect.play(id3)
-                //console.log(music.playing(id2))
                 if(music.playing(id2) == true){
                     music.stop(id2)
                 }
                 endsound.play(id1)
             }
             setStatus(GameStatus.gameover)
+            const gameoverlevel = () => {
+                return body.length > 60 ? 4
+                : body.length <= 60 && body.length > 40 ? 3
+                : body.length <= 40 && body.length > 20 ? 2
+                : body.length <= 20 && body.length >= 1 ? 1
+                : 0;
+            }
+            setGameoverStatus(gameoverlevel())
+            setImgStatus(0)
+
         }
     },[tick])
 
@@ -202,13 +214,13 @@ const useSnakeGame = () => {
             if(music.playing(id2)){
                 return music.stop(id2);
             }else if(endsound.playing(id1)){
-                return endsound.stop(id1);;
+                return endsound.stop(id1)
             }else{}
         }else{
             soundstatus = SoundStatus.on
             setSoundStatus(soundstatus)
             if((music.playing(id2) === false) && (status !== GameStatus.gameover)){
-                return music.play(id2);
+                return music.play(id2)
             }
             if(endsound.playing(id1) === false){
                 return endsound.play(id1);
@@ -217,6 +229,17 @@ const useSnakeGame = () => {
         
     },[soundstatus])
 
+    //gameover後のpopup閉める処理
+    const close_popup2 = useCallback((imgstatus) => {
+        if(gameoverstatus !== 0){
+            imgstatus = 1
+            setImgStatus(imgstatus)
+            endsound.stop(id1)
+            return imgstatus
+        }
+    },[gameoverstatus])
+
+    
     return {
         body,
         difficulty,
@@ -230,7 +253,10 @@ const useSnakeGame = () => {
         soundstatus,
         changeSoundStatus,
         id1,
-        id2
+        id2,
+        gameoverstatus,
+        close_popup2,
+        imgstatus
     };
 }
 

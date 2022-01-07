@@ -6,6 +6,7 @@ import ManipulationPanel from './conponents/ManipulationPanel';
 import Player from './conponents/Player';
 import useSnakeGame from './hooks/useSnakeGame';
 import Popup from './conponents/popup';
+import Gameover from './conponents/Gameover';
 
 
 function App() {
@@ -23,11 +24,20 @@ function App() {
     soundstatus,
     changeSoundStatus,
     id1,
-    id2
+    id2,
+    gameoverstatus,
+    close_popup2,
+    imgstatus
   } = useSnakeGame()
 
   return (
     <div className="App">
+      <Gameover
+        gameoverstatus = {gameoverstatus}
+        status = {status}
+        close_popup2 = {close_popup2}
+        imgstatus = {imgstatus}
+      />
       <Popup />
       <header className="header">
         <div className="title-container">
